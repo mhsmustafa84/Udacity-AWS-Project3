@@ -75,7 +75,7 @@ jobs:
       - restore_cache:
           keys: [frontend-deps]
       - run:
-          name: frontend unit test
+          name: Frontend Unit Test
           command: |
             cd frontend
             npm install
