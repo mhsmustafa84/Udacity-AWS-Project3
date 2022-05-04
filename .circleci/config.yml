@@ -95,33 +95,33 @@ jobs:
                       npm install
                       npm test
 
-  scan-frontend:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-        - checkout
-        - restore_cache:
-              keys: [frontend-deps]
-        - run:
-              name: frontend scan
-              command: |
-                  cd frontend
-                  npm install
-                  npm audit --audit-level=critical
+    scan-frontend:
+        docker:
+            - image: cimg/node:13.8.0
+        steps:
+            - checkout
+            - restore_cache:
+                  keys: [frontend-deps]
+            - run:
+                  name: frontend scan
+                  command: |
+                      cd frontend
+                      npm install
+                      npm audit --audit-level=critical
 
-  scan-backend:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-        - checkout
-        - restore_cache:
-              keys: [backend-deps]
-        - run:
-              name: backend scan
-              command: |
-                  cd backend
-                  npm install
-                  npm audit --audit-level=critical
+    scan-backend:
+        docker:
+            - image: cimg/node:13.8.0
+        steps:
+            - checkout
+            - restore_cache:
+                  keys: [backend-deps]
+            - run:
+                  name: backend scan
+                  command: |
+                      cd backend
+                      npm install
+                      npm audit --audit-level=critical
 
 #   deploy-infrastructure:
 #     docker:
@@ -298,9 +298,9 @@ workflows:
             - test-backend:
                   requires: [build-backend]
             - scan-backend:
-                requires: [build-backend]
+                  requires: [build-backend]
             - scan-frontend:
-                requires: [build-frontend]
+                  requires: [build-frontend]
             # - deploy-infrastructure:
             #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
             #     filters:
